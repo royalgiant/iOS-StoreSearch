@@ -79,24 +79,74 @@ class SearchViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    func parseDictionary(dictionary: [String: AnyObject]) { // 1
+    func parseDictionary(dictionary: [String: AnyObject]) -> [SearchResult] {
+        // 1
+                    
+        var searchResults = [SearchResult]()
         if let array: AnyObject = dictionary["results"] {
-            // 2
+            // 2 
+            
             for resultDict in array as! [AnyObject] {
                 // 3
                 if let resultDict = resultDict as? [String: AnyObject] {
-                    // 4
-                    if let wrapperType = resultDict["wrapperType"] as? NSString {
-                        if let kind = resultDict["kind"] as? NSString {
-                            println("wrapperType: \(wrapperType), kind: \(kind)") }
+                    var searchResult: SearchResult?
+        
+                    if let wrapperType = resultDict["wrapperType"] as? NSString{
+                        switch wrapperType {
+                            case "track":
+                                searchResult = parseTrack(resultDict)
+                            default:
+                                break
                         }
-                // 5
+                    }
+            
+                    if let result = searchResult {
+                        searchResults.append(result)
+                    }
+        
                 } else {
                     println("Expected a dictionary")
                 }
             }
         } else {
             println("Expected 'results' array")
+        }
+        return searchResults
+    }
+    
+    func parseTrack(dictionary: [String: AnyObject]) -> SearchResult {
+        let searchResult = SearchResult()
+        
+        searchResult.name = dictionary["trackName"] as! String
+        searchResult.artistName = dictionary["artistName"] as! String
+        searchResult.artworkURL60 = dictionary["artworkUrl60"] as! String
+        searchResult.artworkURL100 = dictionary["artworkUrl100"] as! String
+        searchResult.storeURL = dictionary["trackViewUrl"] as! String
+        searchResult.kind = dictionary["kind"] as! String
+        searchResult.currency = dictionary["currency"] as! String
+                        
+        if let price = dictionary["trackPrice"] as? NSNumber {
+            searchResult.price = Double(price)
+        }
+        if let genre = dictionary["primaryGenreName"] as? NSString {
+            searchResult.genre = genre as! String
+        }
+        return searchResult
+    }
+    
+    func kindForDisplay(kind: String) -> String {
+        switch kind {
+            case "album": return "Album"
+            case "audiobook": return "Audio Book"
+            case "book": return "Book"
+            case "ebook": return "E-Book"
+            case "feature-movie": return "Movie"
+            case "music-video": return "Music Video"
+            case "podcast": return "Podcast"
+            case "software": return "App"
+            case "song": return "Song"
+            case "tv-episode": return "TV Episode"
+            default: return kind
         }
     }
 }
@@ -113,7 +163,7 @@ extension SearchViewController: UISearchBarDelegate {
  
             if let jsonString = performStoreRequestWithURL(url) {
                 if let dictionary = parseJSON(jsonString){
-                    parseDictionary(dictionary)
+                    searchResults = parseDictionary(dictionary)
                     tableView.reloadData()
                     return
                 }
@@ -149,7 +199,11 @@ extension SearchViewController: UITableViewDataSource {
             
             let searchResult = searchResults[indexPath.row]
             cell.nameLabel.text = searchResult.name
-            cell.artistNameLabel.text = searchResult.artistName
+            if searchResult.artistName.isEmpty {
+                cell.artistNameLabel.text = "Unknown"
+            } else {
+                cell.artistNameLabel.text = String(format: "%@ (%@)", searchResult.artistName, kindForDisplay(searchResult.kind))
+            }
             
             return cell
         }
