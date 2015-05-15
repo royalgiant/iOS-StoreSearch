@@ -19,3 +19,8 @@ class SearchResult {
     var price = 0.0
     var genre = ""
 }
+
+// overloading the operator to make sorting comparisons
+func < (lhs: SearchResult, rhs: SearchResult) -> Bool {
+    return lhs.name.localizedStandardCompare(rhs.name) == NSComparisonResult.OrderedAscending
+}
