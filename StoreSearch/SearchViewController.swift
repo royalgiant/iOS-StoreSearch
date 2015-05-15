@@ -95,11 +95,19 @@ class SearchViewController: UIViewController {
                         switch wrapperType {
                             case "track":
                                 searchResult = parseTrack(resultDict)
+                            case "audiobook":
+                                searchResult = parseAudioBook(resultDict)
+                            case "software":
+                                searchResult = parseSoftware(resultDict)
                             default:
                                 break
                         }
+                    } else if let kind = resultDict["kind"] as? NSString{
+                        if kind == "ebook" {
+                            searchResult = parseEBook(resultDict)
+                        }
                     }
-            
+        
                     if let result = searchResult {
                         searchResults.append(result)
                     }
@@ -148,6 +156,66 @@ class SearchViewController: UIViewController {
             case "tv-episode": return "TV Episode"
             default: return kind
         }
+    }
+    
+    func parseAudioBook(dictionary: [String: AnyObject]) -> SearchResult {
+        let searchResult = SearchResult()
+        searchResult.name = dictionary["collectionName"] as! String
+        searchResult.artistName = dictionary["artistName"] as! String
+        searchResult.artworkURL60 = dictionary["artworkUrl60"] as! String
+        searchResult.artworkURL100 = dictionary["artworkUrl100"] as! String
+        searchResult.storeURL = dictionary["collectionViewUrl"] as! String
+        searchResult.kind = "audiobook"
+        searchResult.currency = dictionary["currency"] as! String
+        if let price = dictionary["collectionPrice"] as? NSNumber {
+            searchResult.price = Double(price)
+        }
+        if let genre = dictionary["primaryGenreName"] as? NSString {
+            searchResult.genre = genre as! String
+        }
+        return searchResult
+    }
+    
+    func parseSoftware(dictionary: [String: AnyObject]) -> SearchResult {
+        let searchResult = SearchResult()
+            
+        searchResult.name = dictionary["trackName"] as! String
+        searchResult.artistName = dictionary["artistName"] as! String
+        searchResult.artworkURL60 = dictionary["artworkUrl60"] as! String
+        searchResult.artworkURL100 = dictionary["artworkUrl100"] as! String
+        searchResult.storeURL = dictionary["trackViewUrl"] as! String
+        searchResult.kind = dictionary["kind"] as! String
+        searchResult.currency = dictionary["currency"] as! String
+            
+        if let price = dictionary["price"] as? NSNumber {
+            searchResult.price = Double(price)
+        }
+            
+        if let genre = dictionary["primaryGenreName"] as? NSString {
+            searchResult.genre = genre as! String
+        }
+            return searchResult
+    }
+    
+    func parseEBook(dictionary: [String: AnyObject]) -> SearchResult {
+        let searchResult = SearchResult()
+                
+        searchResult.name = dictionary["trackName"] as! String
+        searchResult.artistName = dictionary["artistName"] as! String
+        searchResult.artworkURL60 = dictionary["artworkUrl60"] as! String
+        searchResult.artworkURL100 = dictionary["artworkUrl100"] as! String
+        searchResult.storeURL = dictionary["trackViewUrl"] as! String
+        searchResult.kind = dictionary["kind"] as! String
+        searchResult.currency = dictionary["currency"] as! String
+                
+        if let price = dictionary["price"] as? NSNumber {
+            searchResult.price = Double(price)
+        }
+                
+        if let genres: AnyObject = dictionary["genres"] {
+            searchResult.genre = ", ".join(genres as! [String])
+        }
+        return searchResult
     }
 }
 
