@@ -14,6 +14,8 @@
 		A62B7BE81B04F78900811A56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A62B7BE61B04F78900811A56 /* LaunchScreen.xib */; };
 		A62B7BF41B04F78900811A56 /* StoreSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62B7BF31B04F78900811A56 /* StoreSearchTests.swift */; };
 		A6658A7A1B057A540092D271 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6658A791B057A540092D271 /* SearchResult.swift */; };
+		A6A7A2B21B058943004A2A7F /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A7A2B11B058943004A2A7F /* SearchResultCell.xib */; };
+		A6A7A2B41B0595D7004A2A7F /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A2B31B0595D7004A2A7F /* SearchResultCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		A62B7BF21B04F78900811A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A62B7BF31B04F78900811A56 /* StoreSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSearchTests.swift; sourceTree = "<group>"; };
 		A6658A791B057A540092D271 /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResult.swift; path = ../SearchResult.swift; sourceTree = "<group>"; };
+		A6A7A2B11B058943004A2A7F /* SearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchResultCell.xib; path = ../SearchResultCell.xib; sourceTree = "<group>"; };
+		A6A7A2B31B0595D7004A2A7F /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultCell.swift; path = ../SearchResultCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				A62B7BDD1B04F78900811A56 /* AppDelegate.swift */,
 				A62B7BDF1B04F78900811A56 /* SearchViewController.swift */,
 				A6658A791B057A540092D271 /* SearchResult.swift */,
+				A6A7A2B31B0595D7004A2A7F /* SearchResultCell.swift */,
+				A6A7A2B11B058943004A2A7F /* SearchResultCell.xib */,
 				A62B7BE11B04F78900811A56 /* Main.storyboard */,
 				A62B7BE41B04F78900811A56 /* Images.xcassets */,
 				A62B7BE61B04F78900811A56 /* LaunchScreen.xib */,
@@ -197,6 +203,7 @@
 			files = (
 				A62B7BE31B04F78900811A56 /* Main.storyboard in Resources */,
 				A62B7BE81B04F78900811A56 /* LaunchScreen.xib in Resources */,
+				A6A7A2B21B058943004A2A7F /* SearchResultCell.xib in Resources */,
 				A62B7BE51B04F78900811A56 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +224,7 @@
 			files = (
 				A62B7BE01B04F78900811A56 /* SearchViewController.swift in Sources */,
 				A6658A7A1B057A540092D271 /* SearchResult.swift in Sources */,
+				A6A7A2B41B0595D7004A2A7F /* SearchResultCell.swift in Sources */,
 				A62B7BDE1B04F78900811A56 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
