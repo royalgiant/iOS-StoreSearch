@@ -30,11 +30,16 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         searchResults = [String]()
         for i in 0...2 {
             searchResults.append(String(format: "Fake Result %d for '%@'", i,searchBar.text))
         }
         tableView.reloadData()
+    }
+    
+    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+        return .TopAttached
     }
 }
 
