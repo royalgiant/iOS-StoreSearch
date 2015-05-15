@@ -57,6 +57,27 @@ class SearchViewController: UIViewController {
         }
         return nil
     }
+    
+    func parseJSON(jsonString: String) -> [String: AnyObject]? {
+        if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
+            var error: NSError?
+            if let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &error) as? [String: AnyObject] {
+                    return json
+            } else if let error = error {
+                println("JSON Error: \(error)")
+            } else {
+                println("Unknown JSON Error")
+            }
+        }
+        return nil
+    }
+    
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Whoops...", message: "There was an error reading from the iTunes Store. Please try again.", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
 
 }
 
@@ -69,11 +90,16 @@ extension SearchViewController: UISearchBarDelegate {
             searchResults = [SearchResult]()
             
             let url = urlWithSearchText(searchBar.text)
-            println("URL: '\(url)'")
+ 
             if let jsonString = performStoreRequestWithURL(url) {
-                println("Received JSON string '\(jsonString)'")
+                if let dictionary = parseJSON(jsonString){
+                    println("Dictionary \(dictionary)")
+        
+                    tableView.reloadData()
+                    return
+                }
             }
-            tableView.reloadData()
+            showNetworkError()
         }
     }
     
