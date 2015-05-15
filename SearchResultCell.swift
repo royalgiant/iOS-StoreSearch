@@ -14,4 +14,12 @@ class SearchResultCell: UITableViewCell {
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var artworkImageView: UIImageView!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Called after cell object has been loaded from the nib, but before cell is added to table view
+        let selectedView = UIView(frame: CGRect.zeroRect)
+        selectedView.backgroundColor = UIColor(red: 20/255, green: 160/255,blue: 160/255, alpha: 0.5)
+        selectedBackgroundView = selectedView
+    }
+    
 }
