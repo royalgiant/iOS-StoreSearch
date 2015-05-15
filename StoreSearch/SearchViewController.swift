@@ -78,7 +78,27 @@ class SearchViewController: UIViewController {
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
-
+    
+    func parseDictionary(dictionary: [String: AnyObject]) { // 1
+        if let array: AnyObject = dictionary["results"] {
+            // 2
+            for resultDict in array as! [AnyObject] {
+                // 3
+                if let resultDict = resultDict as? [String: AnyObject] {
+                    // 4
+                    if let wrapperType = resultDict["wrapperType"] as? NSString {
+                        if let kind = resultDict["kind"] as? NSString {
+                            println("wrapperType: \(wrapperType), kind: \(kind)") }
+                        }
+                // 5
+                } else {
+                    println("Expected a dictionary")
+                }
+            }
+        } else {
+            println("Expected 'results' array")
+        }
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -93,8 +113,7 @@ extension SearchViewController: UISearchBarDelegate {
  
             if let jsonString = performStoreRequestWithURL(url) {
                 if let dictionary = parseJSON(jsonString){
-                    println("Dictionary \(dictionary)")
-        
+                    parseDictionary(dictionary)
                     tableView.reloadData()
                     return
                 }
