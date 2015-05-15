@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     struct TableViewCellIdentifiers {
         static let searchResultCell = "SearchResultCell"
         static let nothingFoundCell = "NothingFoundCell"
+        static let loadingCell = "LoadingCell"
     }
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -20,6 +21,7 @@ class SearchViewController: UIViewController {
     
     var searchResults = [SearchResult]()
     var hasSearched = false
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,9 @@ class SearchViewController: UIViewController {
         
         cellNib = UINib(nibName: TableViewCellIdentifiers.nothingFoundCell, bundle: nil)
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.nothingFoundCell)
+        
+        cellNib = UINib(nibName: TableViewCellIdentifiers.loadingCell, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.loadingCell)
     }
 
     override func didReceiveMemoryWarning() {
@@ -223,6 +228,9 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         if !searchBar.text.isEmpty {
             searchBar.resignFirstResponder()
+        
+            isLoading = true
+            tableView.reloadData()
             
             hasSearched = true
             searchResults = [SearchResult]()
@@ -233,6 +241,7 @@ extension SearchViewController: UISearchBarDelegate {
                 if let dictionary = parseJSON(jsonString){
                     searchResults = parseDictionary(dictionary)
                     searchResults.sort { $0 < $1 }
+                    isLoading = false
                     tableView.reloadData()
                     return
                 }
@@ -249,7 +258,10 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-        if !hasSearched {
+        
+        if isLoading {
+            return 1
+        }else if !hasSearched {
             return 0
         } else if searchResults.count == 0 {
             return 1
@@ -260,7 +272,16 @@ extension SearchViewController: UITableViewDataSource {
         
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if searchResults.count == 0 {
+            
+        if isLoading {
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.loadingCell, forIndexPath:indexPath) as! UITableViewCell
+            
+            let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
+            spinner.startAnimating()
+            
+            return cell
+        }
+        else if searchResults.count == 0 {
             return tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.nothingFoundCell, forIndexPath: indexPath) as! UITableViewCell
         } else {
             // This variant of the dequeue method lets the table view be a bit smarter, but it only works when you have registered a nib with the table view.
@@ -285,7 +306,7 @@ extension SearchViewController: UITableViewDelegate {
     }
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         // makes sure that you can only select rows with actual search results.
-        if searchResults.count == 0 {
+        if searchResults.count == 0 || isLoading {
             return nil
         } else {
             return indexPath
