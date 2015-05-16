@@ -53,7 +53,7 @@ class DetailViewController: UIViewController {
     
 
     @IBAction func close() {
-        dismissAnimationStyle = .slide
+        dismissAnimationStyle = .Slide
         dismissViewControllerAnimated(true, completion: nil)
     }
     
