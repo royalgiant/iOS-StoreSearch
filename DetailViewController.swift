@@ -37,7 +37,8 @@ class DetailViewController: UIViewController {
         gestureRecognizer.cancelsTouchesInView = false
         gestureRecognizer.delegate = self
         view.addGestureRecognizer(gestureRecognizer)
-    
+        view.backgroundColor = UIColor.clearColor()
+        
         if searchResult != nil {
             updateUI()
         }
