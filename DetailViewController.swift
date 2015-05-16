@@ -32,7 +32,8 @@ class DetailViewController: UIViewController {
     
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("close"))
         gestureRecognizer.cancelsTouchesInView = false
-        gestureRecognizer.delegate = self view.addGestureRecognizer(gestureRecognizer)
+        gestureRecognizer.delegate = self
+        view.addGestureRecognizer(gestureRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
