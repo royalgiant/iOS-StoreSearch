@@ -23,6 +23,7 @@
 		A6A7A2B41B0595D7004A2A7F /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A2B31B0595D7004A2A7F /* SearchResultCell.swift */; };
 		A6A7A2B61B05C8AF004A2A7F /* NothingFoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A7A2B51B05C8AF004A2A7F /* NothingFoundCell.xib */; };
 		A6C711FC1B062E3500AA3294 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C711FB1B062E3400AA3294 /* LoadingCell.xib */; };
+		A6EA155A1B080468000F4056 /* FadeOutAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EA15591B080468000F4056 /* FadeOutAnimationController.swift */; };
 		A6F4F3CE1B07143900B878A4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4F3CD1B07143900B878A4 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		A6A7A2B31B0595D7004A2A7F /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultCell.swift; path = ../SearchResultCell.swift; sourceTree = "<group>"; };
 		A6A7A2B51B05C8AF004A2A7F /* NothingFoundCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NothingFoundCell.xib; path = ../NothingFoundCell.xib; sourceTree = "<group>"; };
 		A6C711FB1B062E3400AA3294 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingCell.xib; path = ../LoadingCell.xib; sourceTree = "<group>"; };
+		A6EA15591B080468000F4056 /* FadeOutAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeOutAnimationController.swift; sourceTree = "<group>"; };
 		A6F4F3CD1B07143900B878A4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 		A62B7BCF1B04F78900811A56 = {
 			isa = PBXGroup;
 			children = (
+				A6EA15591B080468000F4056 /* FadeOutAnimationController.swift */,
 				A62B7BDA1B04F78900811A56 /* StoreSearch */,
 				A62B7BF01B04F78900811A56 /* StoreSearchTests */,
 				A62B7BD91B04F78900811A56 /* Products */,
@@ -249,6 +252,7 @@
 			files = (
 				A62B7BE01B04F78900811A56 /* SearchViewController.swift in Sources */,
 				A6A603121B073FB2008D2FEF /* DimmingPresentationController.swift in Sources */,
+				A6EA155A1B080468000F4056 /* FadeOutAnimationController.swift in Sources */,
 				A6658A7A1B057A540092D271 /* SearchResult.swift in Sources */,
 				A6A7A2B41B0595D7004A2A7F /* SearchResultCell.swift in Sources */,
 				A69AF4AE1B077814003FD9BA /* BounceAnimationController.swift in Sources */,
