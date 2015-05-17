@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A6041BF91B08A2FB004890E3 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6041BFB1B08A2FB004890E3 /* LoadingCell.xib */; };
 		A6041C001B08A558004890E3 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6041C021B08A558004890E3 /* SearchResultCell.xib */; };
+		A6041C091B08A780004890E3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6041C071B08A780004890E3 /* Localizable.strings */; };
+		A6041C0B1B08A7F9004890E3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A62B7BDC1B04F78900811A56 /* Info.plist */; };
 		A62B7BDE1B04F78900811A56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62B7BDD1B04F78900811A56 /* AppDelegate.swift */; };
 		A62B7BE01B04F78900811A56 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62B7BDF1B04F78900811A56 /* SearchViewController.swift */; };
 		A62B7BE31B04F78900811A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A62B7BE11B04F78900811A56 /* Main.storyboard */; };
@@ -44,8 +46,10 @@
 		A6041BFF1B08A496004890E3 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		A6041C011B08A558004890E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SearchResultCell.xib; sourceTree = "<group>"; };
 		A6041C041B08A561004890E3 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SearchResultCell.strings; sourceTree = "<group>"; };
+		A6041C081B08A780004890E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		A6041C0A1B08A7F9004890E3 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		A62B7BD81B04F78900811A56 /* StoreSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A62B7BDC1B04F78900811A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A62B7BDC1B04F78900811A56 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A62B7BDD1B04F78900811A56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A62B7BDF1B04F78900811A56 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A62B7BE21B04F78900811A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		A62B7BDB1B04F78900811A56 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A6041C071B08A780004890E3 /* Localizable.strings */,
 				A62B7BDC1B04F78900811A56 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -237,10 +242,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A62B7BE31B04F78900811A56 /* Main.storyboard in Resources */,
+				A6041C091B08A780004890E3 /* Localizable.strings in Resources */,
 				A6041BF91B08A2FB004890E3 /* LoadingCell.xib in Resources */,
 				A6041C001B08A558004890E3 /* SearchResultCell.xib in Resources */,
 				A63AB8061B08A0EF0020485E /* NothingFoundCell.xib in Resources */,
 				A62B7BE51B04F78900811A56 /* Images.xcassets in Resources */,
+				A6041C0B1B08A7F9004890E3 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +318,15 @@
 			);
 			name = SearchResultCell.xib;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		A6041C071B08A780004890E3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A6041C081B08A780004890E3 /* en */,
+				A6041C0A1B08A7F9004890E3 /* nl */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		A62B7BE11B04F78900811A56 /* Main.storyboard */ = {
