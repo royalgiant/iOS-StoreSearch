@@ -96,7 +96,6 @@
 		A62B7BCF1B04F78900811A56 = {
 			isa = PBXGroup;
 			children = (
-				A66517C41B08AD6900B06B27 /* InfoPlist.strings */,
 				A62B7BDA1B04F78900811A56 /* StoreSearch */,
 				A62B7BF01B04F78900811A56 /* StoreSearchTests */,
 				A62B7BD91B04F78900811A56 /* Products */,
@@ -142,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				A6041C071B08A780004890E3 /* Localizable.strings */,
+				A66517C41B08AD6900B06B27 /* InfoPlist.strings */,
 				A62B7BDC1B04F78900811A56 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -360,6 +360,7 @@
 				A66517C51B08AD6D00B06B27 /* nl */,
 			);
 			name = InfoPlist.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -453,6 +454,7 @@
 				INFOPLIST_FILE = StoreSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -463,6 +465,7 @@
 				INFOPLIST_FILE = StoreSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
