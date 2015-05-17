@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class DetailViewController: UIViewController {
     
@@ -68,6 +69,12 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowMenu" {
+            let controller = segue.destinationViewController as! MenuViewController
+            controller.delegate = self
+        }
+    }
 
     @IBAction func close() {
         dismissAnimationStyle = .Slide
@@ -145,5 +152,25 @@ extension DetailViewController: UIGestureRecognizerDelegate {
     // Allow users to dismiss popup by tapping anywhere outside it
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         return (touch.view === view)
+    }
+}
+// Extension for writing email
+extension DetailViewController: MenuViewControllerDelegate {
+    func menuViewControllerSendSupportEmail(MenuViewController) {
+        dismissViewControllerAnimated(true) {
+            if MFMailComposeViewController.canSendMail() {
+                let controller = MFMailComposeViewController()
+                controller.setSubject(NSLocalizedString("Support Request", comment: "Email subject"))
+                controller.setToRecipients(["your@email-address-here.com"])
+                self.presentViewController(controller, animated: true, completion: nil)
+                controller.mailComposeDelegate = self
+                //controller.modalPresentationStyle = .FormSheet
+            }
+        }
+    }
+}
+
+extension DetailViewController: MFMailComposeViewControllerDelegate { func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

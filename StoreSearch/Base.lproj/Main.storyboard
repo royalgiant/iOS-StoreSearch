@@ -274,10 +274,10 @@
             </objects>
             <point key="canvasLocation" x="755" y="880"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="L9e-Kg-Gj8">
             <objects>
-                <tableViewController id="XDP-Rt-B4o" sceneMemberID="viewController">
+                <tableViewController id="XDP-Rt-B4o" customClass="MenuViewController" customModule="StoreSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="qbJ-OD-qvs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
