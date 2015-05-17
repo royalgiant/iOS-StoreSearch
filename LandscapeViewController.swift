@@ -66,7 +66,7 @@ class LandscapeViewController: UIViewController {
                 case .Loading:
                     showSpinner()
                 case .NoResults:
-                    break
+                    showNothingFoundLabel()
                 case .Results(let list):
                     tileButtons(list)
             }
@@ -85,14 +85,32 @@ class LandscapeViewController: UIViewController {
     func searchResultsReceived() {
         hideSpinner()
         switch search.state {
-            case .NotSearchedYet, .Loading, .NoResults:
+            case .NotSearchedYet, .Loading:
                 break
+            case .NoResults:
+                showNothingFoundLabel()
             case .Results(let list):
                 tileButtons(list)
         }
     }
     private func hideSpinner() {
         view.viewWithTag(1000)?.removeFromSuperview()
+    }
+    
+    private func showNothingFoundLabel() {
+        let label = UILabel(frame: CGRect.zeroRect)
+        label.text = "Nothing Found"
+        label.backgroundColor = UIColor.clearColor()
+        label.textColor = UIColor.whiteColor()
+                                    
+        label.sizeToFit()
+                                    
+        var rect = label.frame
+        rect.size.width = ceil(rect.size.width/2) * 2 // make even
+        rect.size.height = ceil(rect.size.height/2) * 2 // make even 
+        label.frame = rect
+        label.center = CGPoint(x: CGRectGetMidX(scrollView.bounds), y: CGRectGetMidY(scrollView.bounds))
+        view.addSubview(label)
     }
     
     private func tileButtons(searchResults: [SearchResult]) {
