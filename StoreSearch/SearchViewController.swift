@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
     let search = Search()
     
     var landscapeViewController: LandscapeViewController?
-    
+    weak var splitViewDetail: DetailViewController?
     
     @IBAction func segmentChanged(sender: UISegmentedControl) {
         performSearch()
@@ -32,7 +32,9 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Search", comment: "Split-view master button")
-        searchBar.becomeFirstResponder()
+        if UIDevice.currentDevice().userInterfaceIdiom != .Pad{
+            searchBar.becomeFirstResponder()
+        }
         tableView.contentInset = UIEdgeInsets(top: 108, left: 0, bottom: 0, right: 0)
         // Register nib
         var cellNib = UINib(nibName: TableViewCellIdentifiers.searchResultCell, bundle: nil)
@@ -59,6 +61,7 @@ class SearchViewController: UIViewController {
                     let indexPath = sender as! NSIndexPath
                     let searchResult = list[indexPath.row]
                     detailViewController.searchResult = searchResult
+                    detailViewController.isPopUp = true
                 default:
                     break
             }
@@ -121,11 +124,13 @@ class SearchViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    
+    func hideMasterPane() {
+        UIView.animateWithDuration(0.25, animations: {
+            self.splitViewController!.preferredDisplayMode = .PrimaryHidden
+        }, completion: { _ in
+            self.splitViewController!.preferredDisplayMode = .Automatic
+        })
+    }
     
     func showNetworkError() {
         let alert = UIAlertController(title: NSLocalizedString("Whoops...", comment: "Error alert: title"), message: NSLocalizedString("There was an error reading from the iTunes Store. Please try again.", comment: "Error alert: message"), preferredStyle: .Alert)
@@ -208,9 +213,23 @@ extension SearchViewController: UITableViewDataSource {
 }
 extension SearchViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // simply deselect the row with an animation
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        performSegueWithIdentifier("ShowDetail", sender: indexPath)
+        searchBar.resignFirstResponder()
+        
+        if view.window!.rootViewController!.traitCollection.horizontalSizeClass == .Compact {
+            // simply deselect the row with an animation
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            performSegueWithIdentifier("ShowDetail", sender: indexPath)
+        } else {
+            switch search.state{
+                case .Results(let list):
+                    splitViewDetail?.searchResult = list[indexPath.row]
+                default:
+                    break
+            }
+            if splitViewController!.displayMode != .AllVisible {
+                hideMasterPane()
+            }
+        }
     }
                     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
