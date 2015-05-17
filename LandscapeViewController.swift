@@ -13,7 +13,7 @@ class LandscapeViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var searchResults = [SearchResult]()
+    var search: Search!
     
     private var downloadTasks = [NSURLSessionDownloadTask]()
     
@@ -59,12 +59,8 @@ class LandscapeViewController: UIViewController {
             
         if firstTime {
             firstTime = false
-            tileButtons(searchResults)
+            tileButtons(search.searchResults)
         }
-    }
-    
-    deinit {
-        println("deinit \(self)")
     }
     
     private func tileButtons(searchResults: [SearchResult]) {
