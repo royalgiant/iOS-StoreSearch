@@ -73,6 +73,19 @@ class LandscapeViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            switch search.state {
+                case .Results(let list):
+                    let detailViewController = segue.destinationViewController as! DetailViewController
+                    let searchResult = list[sender!.tag - 2000]
+                    detailViewController.searchResult = searchResult
+                default:
+                    break
+            }
+        }
+    }
+    
     private func showSpinner() {
         let spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
         spinner.center = CGPoint(x: CGRectGetMidX(scrollView.bounds) + 0.5,
@@ -159,6 +172,8 @@ class LandscapeViewController: UIViewController {
                     x: x + paddingHorz,
                     y: marginY + CGFloat(row)*itemHeight + paddingVert,
                     width: buttonWidth, height: buttonHeight)
+            button.tag = 2000 + index
+            button.addTarget(self, action: Selector("buttonPressed:"), forControlEvents: .TouchUpInside)
             downloadImageForSearchResult(searchResult, andPlaceOnButton: button)
             // 4
             scrollView.addSubview(button)
@@ -186,6 +201,10 @@ class LandscapeViewController: UIViewController {
                 
         pageControl.numberOfPages = numPages
         pageControl.currentPage = 0
+    }
+    
+    func buttonPressed(sender: UIButton) {
+        performSegueWithIdentifier("ShowDetail", sender: sender)
     }
     
     private func downloadImageForSearchResult(searchResult: SearchResult, andPlaceOnButton button: UIButton) {
