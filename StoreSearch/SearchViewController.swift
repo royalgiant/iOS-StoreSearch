@@ -82,6 +82,7 @@ class SearchViewController: UIViewController {
         // 2
         landscapeViewController = storyboard!.instantiateViewControllerWithIdentifier( "LandscapeViewController") as? LandscapeViewController
         if let controller = landscapeViewController {
+            controller.searchResults = searchResults
             // 3
             controller.view.frame = view.bounds
             controller.view.alpha = 0
