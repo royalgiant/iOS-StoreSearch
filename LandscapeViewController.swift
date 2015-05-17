@@ -16,6 +16,13 @@ class LandscapeViewController: UIViewController {
     var searchResults = [SearchResult]()
     private var firstTime = true
     
+    @IBAction func pageChanged(sender: UIPageControl) {
+        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseInOut, animations: {
+            self.scrollView.contentOffset = CGPoint(x: self.scrollView.bounds.size.width * CGFloat(sender.currentPage), y: 0)
+            },
+            completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,8 +37,7 @@ class LandscapeViewController: UIViewController {
         
         scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "LandscapeBackground")!)
         
-        //  Tells scroll view how big its insides are. Can only be set from code. It is a reason for why
-        // scroll view doesn't scroll.
+        pageControl.numberOfPages = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,9 +128,22 @@ class LandscapeViewController: UIViewController {
                 
         let buttonsPerPage = columnsPerPage * rowsPerPage
         let numPages = 1 + (searchResults.count - 1) / buttonsPerPage
+        //  Tells scroll view how big its insides are. Can only be set from code. It is a reason for why
+        // scroll view doesn't scroll.
         scrollView.contentSize = CGSize(
                 width: CGFloat(numPages)*scrollViewWidth,
                 height: scrollView.bounds.size.height)
         println("Number of pages: \(numPages)")
+                
+        pageControl.numberOfPages = numPages
+        pageControl.currentPage = 0
+    }
+}
+
+extension LandscapeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let width = scrollView.bounds.size.width
+        let currentPage = Int((scrollView.contentOffset.x + width/2) / width)
+        pageControl.currentPage = currentPage
     }
 }
